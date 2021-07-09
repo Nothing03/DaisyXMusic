@@ -125,7 +125,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("etc/font.otf", 32)
-    draw.text((205, 550), f"Judul: {title}", (255, 255, 255), font=font)
+    draw.text((205, 550), f"Judul: {title}...", (255, 255, 255), font=font)
     draw.text((205, 590), f"Durasi: {duration}", (255, 255, 255), font=font)
     draw.text((205, 630), f"Dilihat: {views}", (255, 255, 255), font=font)
     draw.text(
@@ -152,7 +152,7 @@ async def playlist(client, message):
         temp.append(t)
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
-    msg = "**⚡️Sedang memutar di** in {}".format(message.chat.title)
+    msg = "**⚡️Sedang memutar di** {}".format(message.chat.title)
     msg += "\n- " + now_playing
     msg += "\n- 👤Atas permintaan  " + by
     temp.pop(0)
@@ -341,7 +341,7 @@ async def m_cb(b, cb):
             await cb.answer("Chat is not connected!", show_alert=True)
         else:
             callsmusic.pause(chet_id)
-            await cb.answer("Music Paused!")
+            await cb.answer("Music terjeda!")
             await cb.message.edit(
                 updated_stats(m_chat, qeue), reply_markup=r_ply("play")
             )
@@ -353,7 +353,7 @@ async def m_cb(b, cb):
             await cb.answer("Chat is not connected!", show_alert=True)
         else:
             callsmusic.resume(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Music Terjeda!")
             await cb.message.edit(
                 updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
             )
@@ -388,7 +388,7 @@ async def m_cb(b, cb):
             await cb.answer("Chat is not connected or already playng", show_alert=True)
         else:
             callsmusic.resume(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Music Terjeda!")
     elif type_ == "puse":
         if (chet_id not in callsmusic.active_chats) or (
             callsmusic.active_chats[chet_id] == "paused"
@@ -396,7 +396,7 @@ async def m_cb(b, cb):
             await cb.answer("Chat is not connected or already paused", show_alert=True)
         else:
             callsmusic.pause(chet_id)
-            await cb.answer("Music Paused!")
+            await cb.answer("Music Terjeda!")
     elif type_ == "cls":
         await cb.answer("Closed menu")
         await cb.message.delete()
@@ -543,7 +543,7 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             await lel.edit(
-                f"❌ Durasi terlalu panjang {DURATION_LIMIT} minute(s) aren't allowed to play!"
+                f"❌ Durasi terlalu panjang woi {DURATION_LIMIT} minute(s) tidak dapat diputar !"
             )
             return
         keyboard = InlineKeyboardMarkup(
@@ -597,7 +597,7 @@ async def play(_, message: Message):
                 dur += (int(dur_arr[i]) * secmul)
                 secmul *= 60
             if (dur / 60) > DURATION_LIMIT:
-                 await lel.edit(f"**❌Music melebihi batas pemutaran {DURATION_LIMIT} Tidak dapat diputar!**")
+                 await lel.edit(f"**<i>❌Music melebihi batas pemutaran woi {DURATION_LIMIT} Tidak dapat diputar!</i>**")
                  return
         except:
             pass        
@@ -690,7 +690,7 @@ async def play(_, message: Message):
                     dur += (int(dur_arr[i]) * secmul)
                     secmul *= 60
                 if (dur / 60) > DURATION_LIMIT:
-                     await lel.edit(f"❌ Music melebihi durasi {DURATION_LIMIT} Tidak dapat diputar!")
+                     await lel.edit(f"**<i>❌ Music melebihi durasi {DURATION_LIMIT} Tidak dapat diputar woi!<i/>**")
                      return
             except:
                 pass
